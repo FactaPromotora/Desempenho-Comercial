@@ -26,9 +26,12 @@ EXCEL_PATH = "consolidado.xlsx"
 
 @st.cache_data(show_spinner=False)
 def carregar_excel_local(caminho):
-    """Carrega Excel local com múltiplas abas e retorna um dicionário de DataFrames"""
     try:
-        xls = pd.read_excel(caminho, sheet_name=None)
+        xls = pd.read_excel(
+            caminho,
+            sheet_name=None,
+            engine="openpyxl"  # 👈 ESSENCIAL
+        )
         return xls
     except Exception as e:
         st.error(f"Erro ao carregar Excel: {e}")
