@@ -27,19 +27,13 @@ st.set_page_config(layout='wide', page_icon="assets/icons/OIP.png")
 # ------------------------------
 # Carregamento do arquivo local
 # ------------------------------
-EXCEL_PATH = "consolidado.xlsx"
-
 @st.cache_data(show_spinner=False)
-def carregar_excel_local(caminho):
-    """Carrega Excel local com múltiplas abas e retorna um dicionário de DataFrames"""
-    try:
-        xls = pd.read_excel(caminho, sheet_name=None)
-        return xls
-    except Exception as e:
-        st.error(f"Erro ao carregar Excel: {e}")
-        st.stop()
+def load_data():
+    df = pd.read_parquet("consolidado.parquet")
+    df["Data"] = pd.to_datetime(df["Data"], errors="coerce")
+    return df
 
-rede = carregar_excel_local(EXCEL_PATH)
+rede = load_data()
 
 # ------------------------------
 # Função de limpeza de moeda
