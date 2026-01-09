@@ -19,6 +19,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 import io
 
+st.set_page_config(layout='wide')
+
 # ------------------------------
 # Carregamento do arquivo local
 # ------------------------------
