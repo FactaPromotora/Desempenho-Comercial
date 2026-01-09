@@ -7,17 +7,21 @@ Original file is located at
     https://colab.research.google.com/drive/1DtDWgPXGW4RqgLzfy1cxAdfjfPh_jn1W
 """
 
-# app.py
-import streamlit as st
+# Core
+import re
+import io
+
+# Data
 import pandas as pd
 import numpy as np
-import re
+
+# App
 import streamlit as st
-import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
+
+# Visualização
 import plotly.graph_objects as go
-import plotly.express as px
-import io
+
+
 
 # ------------------------------
 # Configuração do app
@@ -154,14 +158,6 @@ for nome_aba, df in rede.items():
 rede = pd.concat(
     [df.assign(Produto=nome) for nome, df in rede.items()]
 )
-
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.graph_objects as go
-import plotly.express as px
-from matplotlib import pyplot as plt
-from matplotlib.ticker import FuncFormatter
 
 # ------------------------------------------------------
 # INÍCIO — TÍTULO PRINCIPAL
