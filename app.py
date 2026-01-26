@@ -664,7 +664,7 @@ def grafico_produtividade(df, eixo_x, titulo):
 # APP
 # ======================================================
 
-st.title("Desempenho Comercial")
+st.title("Acomp. Diário de Vendas FACTA D-1 - Visão 360º")
 
 pagina = st.selectbox("Página", ["Visão Executiva","Desempenho Comercial","Produtividade & Comparativos", "Ranking & Metas", "Análise por Produto"])
 
