@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 # ------------------------------------------------------
 # Layout e Título
 # ------------------------------------------------------
-st.set_page_config(page_title="Acomp. Diário de Vendas FACTA D-1 - Visão 360º", layout="wide")
+st.set_page_config(page_title="Acomp. Diário de Vendas FACTA M-1 - Visão 360º", layout="wide")
 
 #------------------------------------------------------
 # Cache e carregamento da base
@@ -664,7 +664,7 @@ def grafico_produtividade(df, eixo_x, titulo):
 # APP
 # ======================================================
 
-st.title("Acomp. Diário de Vendas FACTA D-1 - Visão 360º")
+st.title("Acomp. Diário de Vendas FACTA M-1 - Visão 360º")
 
 pagina = st.selectbox("Página", ["Visão Executiva","Desempenho Comercial","Produtividade & Comparativos", "Ranking & Metas", "Análise por Produto"])
 
