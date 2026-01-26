@@ -117,8 +117,8 @@ def preparar_kpi_mensal(rede: pd.DataFrame) -> pd.DataFrame:
             as_index=False
         )
         .agg(
-            real_acum=("Real_Acumulada", "max"),
-            meta_acum=("Meta_Acumulada", "max"),
+            real_acum=("Real_Acumulada", "last"),
+            meta_acum=("Meta Mês", "last"),
             produtividade=("produtividade", "mean"),
             qtd_operadores=("Qtd Operadores C/Meta", "last"),
             qtd_ating=("Qtd Operadores Ating. Meta", "last"),
