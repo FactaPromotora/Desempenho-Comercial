@@ -1494,7 +1494,7 @@ elif pagina == "Análise por Produto":
     df_dia["Status"] = np.where(
         df_dia["dia_sem_producao"] == 1,
         "Houve Produção",
-        "Não Houve Produção"
+        "Nâo Houve Produção"
     )
 
     # --------------------------------------------------
@@ -1600,3 +1600,4 @@ elif pagina == "Análise por Produto":
     )
 
     st.plotly_chart(fig, use_container_width=True)
+       
