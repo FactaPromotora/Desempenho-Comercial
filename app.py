@@ -664,7 +664,7 @@ def grafico_produtividade(df, eixo_x, titulo):
 # APP
 # ======================================================
 
-st.title("Acomp. Diário de Vendas FACTA M-1 - Visão 360º")
+st.title("Acomp. Diário de Vendas FACTA M-1 (Visão 360º)")
 
 pagina = st.selectbox("Página", ["Visão Executiva","Desempenho Comercial","Produtividade & Comparativos", "Ranking & Metas", "Análise por Produto"])
 
@@ -717,19 +717,19 @@ if pagina == "Visão Executiva":
         # MÉTRICAS DERIVADAS
         # -------------------------------------------------
         df["Ating (%)"] = (df["Real Acum"] / df["Meta Acum"]) * 100
-        df["Ating (%)"] = df["Ating (%)"].round(1)
-        df["Dispersão (%)"] = df["Dispersão (%)"].round(1)
+        df["Ating (%)"] = df["Ating (%)"].round(2)
+        df["Dispersão (%)"] = df["Dispersão (%)"].round(2)
 
         # -------------------------------------------------
         # Cria df_fmt antes de gerar a coluna combinada
         # -------------------------------------------------
         df_fmt = df.copy()
-        df_fmt["Real Acum"] = df_fmt["Real Acum"].map(lambda x: f"R$ {x:,.0f}".replace(",", "."))
-        df_fmt["Meta Acum"] = df_fmt["Meta Acum"].map(lambda x: f"R$ {x:,.0f}".replace(",", "."))
-        df_fmt["Produtividade"] = df_fmt["Produtividade"].map(lambda x: f"R$ {x:,.0f}")
+        df_fmt["Real Acum"] = df_fmt["Real Acum"].map(lambda x: f"R$ {x:,.2f}".replace(",", "."))
+        df_fmt["Meta Acum"] = df_fmt["Meta Acum"].map(lambda x: f"R$ {x:,.2f}".replace(",", "."))
+        df_fmt["Produtividade"] = df_fmt["Produtividade"].map(lambda x: f"R$ {x:,.2f}")
         df_fmt["Qtd Operadores"] = df["Qtd Operadores"].astype(int)
         df_fmt["Qtd Ating"] = df["Qtd Ating"].astype(int)
-        df_fmt["Dispersão (%)"] = df_fmt["Dispersão (%)"].map(lambda x: f"{x:.1f}%")
+        df_fmt["Dispersão (%)"] = df_fmt["Dispersão (%)"].map(lambda x: f"{x:.2f}%")
         df_fmt["Média de dias zerados p/Loja"] = df_fmt["Média de dias zerados p/Loja"].round(0)
 
         # -------------------------------------------------
@@ -803,12 +803,12 @@ if pagina == "Visão Executiva":
 
 
         # Formatar os números da linha REDE igual ao df_fmt
-        linha_rede["Real Acum"] = f"R$ {linha_rede['Real Acum']:,.0f}".replace(",", ".")
-        linha_rede["Meta Acum"] = f"R$ {linha_rede['Meta Acum']:,.0f}".replace(",", ".")
-        linha_rede["Produtividade"] = f"R$ {linha_rede['Produtividade']:,.0f}"
+        linha_rede["Real Acum"] = f"R$ {linha_rede['Real Acum']:,.2f}".replace(",", ".")
+        linha_rede["Meta Acum"] = f"R$ {linha_rede['Meta Acum']:,.2f}".replace(",", ".")
+        linha_rede["Produtividade"] = f"R$ {linha_rede['Produtividade']:,.2f}"
         linha_rede["Qtd Operadores"] = int(linha_rede["Qtd Operadores"])
         linha_rede["Qtd Ating"] = int(linha_rede["Qtd Ating"])
-        linha_rede["Dispersão (%)"] = f"{linha_rede['Dispersão (%)']:.1f}%"
+        linha_rede["Dispersão (%)"] = f"{linha_rede['Dispersão (%)']:.2f}%"
         linha_rede["Média de dias zerados p/Loja"] = round(linha_rede["Média de dias zerados p/Loja"], 0)
 
         # Adicionar linha REDE ao df_fmt
@@ -839,11 +839,11 @@ if pagina == "Visão Executiva":
                         "Realizado Mensal",
                         "Meta Mensal",
                         "Atingimento (%)",
-                        "Produtividade Média por Consultor",
-                        "Qtd. Operadores",
-                        "Qtd. Atingindo",
+                        "Produtividade Diária (Média por Consultor)",
+                        "Qtd. Operadores c/Meta",
+                        "Qtd. Atingindo Meta",
                         "Dispersão (%)",
-                        "Média de Dias Sem Pagamento por Loja"
+                        "Média de dias zerados p/Loja"
                     ],
                     fill_color="#F2F2F2",
                     align="center",
