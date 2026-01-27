@@ -1540,8 +1540,8 @@ elif pagina == "Análise por Produto":
             "Status": "Status"
         },
         color_discrete_map={
-            "Não Houve Produção": "#C62828",
             "Houve Produção": "#2E7D32",
+            "Não Houve Produção": "C62828",
         },
         height=420
     )
