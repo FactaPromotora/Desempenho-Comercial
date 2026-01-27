@@ -739,7 +739,7 @@ if pagina == "Visão Executiva":
             pct = min(real / meta, 1)
             preenchido = int(pct * largura)
             barra = "█" * preenchido + "░" * (largura - preenchido)
-            percentual = round((real / meta) * 100, 1)
+            percentual = (real / meta) * 100
             return barra, percentual  # retorna barra e valor separado
 
         # Criar colunas separadas
