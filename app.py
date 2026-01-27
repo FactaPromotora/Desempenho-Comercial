@@ -666,12 +666,12 @@ def grafico_produtividade(df, eixo_x, titulo):
 
 st.title("Acomp. Diário de Vendas FACTA M-1 (Visão 360º)")
 
-pagina = st.selectbox("Página", ["Visão Executiva","Desempenho Comercial","Produtividade & Comparativos", "Ranking & Metas", "Análise por Produto"])
+pagina = st.selectbox("Página", ["Painel Executivo","Desempenho Comercial","Produtividade & Comparativos", "Ranking & Metas", "Análise por Produto"])
 
 #========================================================
 # Página inicial
 #========================================================
-if pagina == "Visão Executiva":
+if pagina == "Painel Executivo":
 
     ano_kpi = st.sidebar.selectbox(
         "Ano",
