@@ -1493,8 +1493,8 @@ elif pagina == "Análise por Produto":
 
     df_dia["Status"] = np.where(
         df_dia["dia_sem_producao"] == 1,
-        "Houve Produção",
-        "Nâo Houve Produção"
+        "Não Houve Produção",
+        "Houve Produção"
     )
 
     # --------------------------------------------------
@@ -1540,8 +1540,8 @@ elif pagina == "Análise por Produto":
             "Status": "Status"
         },
         color_discrete_map={
+            "Não Houve Produção": "#C62828",
             "Houve Produção": "#2E7D32",
-            "Nâo Houve Produção": "#C62828"
         },
         height=420
     )
