@@ -798,7 +798,7 @@ if pagina == "Visão Executiva":
 
         # Barra + percentual da linha agregada
         barra, ating = barra_com_percentual(linha_rede["Real Acum"], linha_rede["Meta Acum"])
-        linha_rede["Real x Meta (%)"] = f"{barra} {ating:.1f}%"
+        linha_rede["Real x Meta (%)"] = f"{barra} {ating:.2f}%"
         cor_rede = cor_percentual(ating)
 
 
