@@ -1501,7 +1501,7 @@ elif pagina == "Análise por Produto":
     # TOTAIS E RANKING
     # --------------------------------------------------
     totais = (
-        df_dia[df_dia["Status"] == "Nâo Houve Produção"]
+        df_dia[df_dia["Status"] == "Não Houve Produção"]
         .groupby("Nome_Loja")["Data"]
         .nunique()
         .reset_index(name="Dias Sem Produção")
