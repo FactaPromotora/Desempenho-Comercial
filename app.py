@@ -1493,8 +1493,8 @@ elif pagina == "Análise por Produto":
 
     df_dia["Status"] = np.where(
         df_dia["dia_sem_producao"] == 1,
-        "Não Houve Produção",
-        "Houve Produção"
+        "Houve Produção",
+        "Não Houve Produção"
     )
 
     # --------------------------------------------------
