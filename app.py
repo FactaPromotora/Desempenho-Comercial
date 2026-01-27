@@ -764,7 +764,7 @@ if pagina == "Visão Executiva":
         cores = df["Ating"].apply(cor_percentual).tolist()
 
         # Coluna combinada no df_fmt
-        df_fmt["Real x Meta (%)"] = df["Barra"] + " " + df["Ating"].map(lambda x: f"{x:.1f}%")
+        df_fmt["Real x Meta (%)"] = df["Barra"] + " " + df["Ating"].map(lambda x: f"{x:.2f}%")
 
         def cor_dispersao(disp):
             if disp <= 20:
