@@ -1527,76 +1527,76 @@ elif pagina == "Análise por Produto":
     # --------------------------------------------------
     # GRÁFICO SCATTER (MAPA)
     # --------------------------------------------------
-    import plotly.express as px
-
-    fig = px.scatter(
-        df_dia,
-        x="Data",
-        y="Nome_Loja",
-        color="Status",
-        labels={
-            "Nome_Loja": "Loja",
-            "Data": "Data",
-            "Status": "Status"
-        },
-        color_discrete_map={
-            "Houve Produção": "#2E7D32",
-            "Não Houve Produção": "#C62828",
-        },
-        height=420
-    )
-    # RANKING
-    fig.update_yaxes(
-        categoryorder="array",
-        categoryarray=ranking_lojas
-    )
-
-    fig.update_traces(
-        hovertemplate=
-            "<b>Loja:</b> %{y}<br>"
-            "<b>Data:</b> %{x|%d/%m}<br>"
-            "<b>Status:</b> %{customdata[0]}"
-            "<extra></extra>"
-    )
-
-    fig.update_traces(
-        marker=dict(size=16, line=dict(width=0.8, color="#333"))
-    )
-
-    # Linhas horizontais (efeito ranking)
-    for i, _ in enumerate(ranking_lojas):
-        fig.add_hline(
-            y=i - 0.5,
-            line_width=1,
-            line_color="#E0E0E0",
-            layer="below"
+     import plotly.express as px
+    
+        fig = px.scatter(
+            df_dia,
+            x="Data",
+            y="Nome_Loja",
+            color="Status",
+            labels={
+                "Nome_Loja": "Loja",
+                "Data": "Data",
+                "Status": "Status"
+            },
+            color_discrete_map={
+                "Houve Produção": "#2E7D32",
+                "Nâo Houve Produção": "#C62828"
+            },
+            height=420
         )
-
-    # Coluna de totais à direita
-    data_ref = df_dia["Data"].max().strftime("%d/%m")
-    for _, row in totais.iterrows():
-        fig.add_annotation(
-            x=df_dia["Data"].max() + pd.Timedelta(days=0.5),
-            y=row["Nome_Loja"],
-            text=f"<b>{int(row['Dias Sem Produção'])}</b>",
-            showarrow=False,
-            font=dict(size=13, color="#B71C1C")
+        # RANKING
+        fig.update_yaxes(
+            categoryorder="array",
+            categoryarray=ranking_lojas
         )
-
-    fig.update_xaxes(
-        range=[
-            df_dia["Data"].min(),
-            df_dia["Data"].max() + pd.Timedelta(days=1)
-        ]
-    )
-
-    fig.update_layout(
-        xaxis_title="Data",
-        yaxis_title="Lojas",
-        legend_title="Status",
-        plot_bgcolor="white",
-        dragmode=False,
-        margin=dict(l=80, r=120, t=60, b=40)
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
+    
+        fig.update_traces(
+            hovertemplate=
+                "<b>Loja:</b> %{y}<br>"
+                "<b>Data:</b> %{x|%d/%m}<br>"
+                "<b>Status:</b> %{customdata[0]}"
+                "<extra></extra>"
+        )
+    
+        fig.update_traces(
+            marker=dict(size=16, line=dict(width=0.8, color="#333"))
+        )
+    
+        # Linhas horizontais (efeito ranking)
+        for i, _ in enumerate(ranking_lojas):
+            fig.add_hline(
+                y=i - 0.5,
+                line_width=1,
+                line_color="#E0E0E0",
+                layer="below"
+            )
+    
+        # Coluna de totais à direita
+        data_ref = df_dia["Data"].max().strftime("%d/%m")
+        for _, row in totais.iterrows():
+            fig.add_annotation(
+                x=df_dia["Data"].max() + pd.Timedelta(days=0.5),
+                y=row["Nome_Loja"],
+                text=f"<b>{int(row['Dias Sem Produção'])}</b>",
+                showarrow=False,
+                font=dict(size=13, color="#B71C1C")
+            )
+    
+        fig.update_xaxes(
+            range=[
+                df_dia["Data"].min(),
+                df_dia["Data"].max() + pd.Timedelta(days=1)
+            ]
+        )
+    
+        fig.update_layout(
+            xaxis_title="Data",
+            yaxis_title="Lojas",
+            legend_title="Status",
+            plot_bgcolor="white",
+            dragmode=False,
+            margin=dict(l=80, r=120, t=60, b=40)
+        )
+    
+        st.plotly_chart(fig, use_container_width=True)
