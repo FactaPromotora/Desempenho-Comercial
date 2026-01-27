@@ -717,8 +717,8 @@ if pagina == "Visão Executiva":
         # MÉTRICAS DERIVADAS
         # -------------------------------------------------
         df["Ating (%)"] = (df["Real Acum"] / df["Meta Acum"]) * 100
-        df["Ating (%)"] = df["Ating (%)"].round(2)
-        df["Dispersão (%)"] = df["Dispersão (%)"].round(2)
+        df["Ating (%)"] = df["Ating (%)"]
+        df["Dispersão (%)"] = df["Dispersão (%)"]
 
         # -------------------------------------------------
         # Cria df_fmt antes de gerar a coluna combinada
