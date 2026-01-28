@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 # ------------------------------------------------------
 # Layout e Título
 # ------------------------------------------------------
-st.set_page_config(page_title="Acomp. Diário de Vendas FACTA M-1 - Visão 360º", layout="wide")
+st.set_page_config(page_title="Acomp. Diário de Vendas FACTA D-1  (Visão 360º)", layout="wide")
 
 #------------------------------------------------------
 # Cache e carregamento da base
@@ -45,9 +45,9 @@ def padronizar_base_dias_sem_producao(df: pd.DataFrame) -> pd.DataFrame:
     ]
 
     # -------------------------------------------------
-    # 1️⃣ PRODUTOS ≠ CONSIG (já normalizados)
+    # 1️⃣ PRODUTOS NORMAIS (tudo que NÃO é CONSIG)
     # -------------------------------------------------
-    df_outros = df[df["produto"] != "CONSIG"][
+    df_outros = df[
         colunas_id + ["produto", "dia_sem_producao"]
     ].copy()
 
@@ -58,13 +58,13 @@ def padronizar_base_dias_sem_producao(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     # -------------------------------------------------
-    # 2️⃣ CONSIG → explode subprodutos em linhas
+    # 2️⃣ CONSIG → explode subprodutos
     # -------------------------------------------------
     mapa_consig = {
         "Novo_sem_producao": "CONSIG_NOVO",
         "Refin_sem_producao": "CONSIG_REFIN",
-        "Refin_Port_TX_INF_sem_producao": "CONSIG_REFIN_PORT_TX_INF",
-        "PORT_E_Refin_TX_SUP_sem_producao": "CONSIG_PORT_&_REFIN_TX_SUP"
+        "Refin_Port_TX_INF_sem_producao": "CONSIG_PORT_TX_INF",
+        "PORT_E_Refin_TX_SUP_sem_producao": "CONSIG_PORT_TX_SUP"
     }
 
     df_consig = df[df["produto"] == "CONSIG"][
@@ -91,10 +91,42 @@ def padronizar_base_dias_sem_producao(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     # -------------------------------------------------
-    # 3️⃣ CONCATENA BASE FINAL
+    # 3️⃣ CONSOLIDA PORT_TX_INF + PORT_TX_SUP
+    #    regra: se um produziu → houve produção (max)
     # -------------------------------------------------
+    produtos_tx = [
+        "CONSIG_PORT_TX_INF",
+        "CONSIG_PORT_TX_SUP"
+    ]
+
+    df_tx = df_consig[df_consig["produto"].isin(produtos_tx)].copy()
+
+    df_tx_consolidado = (
+        df_tx
+        .groupby(
+            colunas_id,
+            as_index=False
+        )
+        .agg(
+            dia_sem_producao=("dia_sem_producao", lambda x: int((x == 1).all()))
+        )
+    )
+
+    df_tx_consolidado["produto"] = "CONSIG_PORT"
+
+    # -------------------------------------------------
+    # 4️⃣ Remove os TX originais e junta tudo
+    # -------------------------------------------------
+    df_consig_final = df_consig[
+        ~df_consig["produto"].isin(produtos_tx)
+    ]
+
     df_final = pd.concat(
-        [df_outros, df_consig],
+        [
+            df_outros,
+            df_consig_final,
+            df_tx_consolidado
+        ],
         ignore_index=True
     )
 
